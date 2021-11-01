@@ -168,5 +168,5 @@ def launch():
                 event.halt = True
                 return
 
-    # core.openflow.addListenerByName("ConnectionUp", start_switch)
+    core.openflow.addListenerByName("ConnectionUp", start_switch)
     core.openflow.addListenerByName("PacketIn", start_firewall)
