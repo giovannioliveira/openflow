@@ -1,0 +1,65 @@
+CONTENTS OF THIS FILE
+---------------------
+ * Introduction
+ * Technical Characteristcs
+ * Requirements
+ * Running
+ * Building from Source
+ * Run benchmark tests
+ * Maintainers
+
+
+INTRODUCTION
+------------
+A tiny implementation of a switch and a firewall controllers for SDN over the OpenFlow protocol.
+
+
+TECHNICAL CHARACTERISTICS
+-------------------------
+ - Programming Language:
+	Python 3
+ - Implementation Protocol:
+    OpenFlow v1
+ - Development and Testing Environment:
+	VM at https://github.com/mininet/mininet/releases/download/2.2.2/mininet-2.2.2-170321-ubuntu-14.04.4-server-amd64.zip
+
+
+REQUIREMENTS
+------------
+ - Run pre-built executable:
+ 	Python 3 Interpreter
+    POX Python library at https://github.com/noxrepo/pox
+ - Run tests:
+    Netcat
+    Tcpdump
+    Iperf
+    Wireshark (optional)
+
+
+CONFIG
+-------
+To config the firewall, go to firewall.py and change the set of tuples defining 'rules' variable, at line 7.
+Each tuple correspond to a rule for blocking matching packets. Tuples are disposed as following:
+(ip_src, ip_dst, port, prot), where:
+- ip_src is the source IP. It must be None or an IpAddr('<addr>') object.
+- ip_dst is the destination IP. It must be None or and IpAddr('<addr>') object
+- port os the OS port. It must be None or a number of a valid OS port
+- prot is the protocol at transport layer. It must be None, 'tcp' or 'udp'
+
+* note that IP values must be enclosed by IpAddr from pox.lib.addresses
+
+RUNNING
+-------
+From root POX root directory, run the boot up script and point to the controller file:
+$ ./pox.py log.level --DEBUG <controller_file>
+
+For running switch only:
+$ ./pox.py log.level --DEBUG <controller_path>/switch.py
+
+For running switch only:
+$ ./pox.py log.level --DEBUG <controller_path>/firewall.py
+
+
+MAINTAINERS
+-----------
+Giovanni Oliveira <giovanni@ime.usp.br>
